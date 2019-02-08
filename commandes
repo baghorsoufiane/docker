@@ -1,0 +1,37 @@
+Une commande docker c'est une image ; lors de l'execution d'une commande docker charge l'image (Pull) après il l'execute.
+
+Nous présentons dans cette section les différentes commandes docker :
+
+1- La commande qui permet d'executer le premier programme HelloWorld : docker run hello-world ;
+2- La commande : docker ps (-a)
+
+MacBook-Pro-5:bin admin$ docker ps -a 
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+0072da040081        hello-world         "/hello"            4 minutes ago       Exited (0) 4 minutes ago                       festive_poincare
+738e8141bd54        hello-world         "/hello"            13 days ago         Exited (0) 13 days ago                         jovial_varahamihira
+98f6446ffa7a        hello-world         "/hello"            13 days ago         Exited (0) 13 days ago                         gallant_lehmann
+
+cette commande (sans le flag -a) permet d'obtenir les containers en cours d'exécution ; en ajoutant ce dernier flag (-a) on obtient
+toutes les instances docker avec les différentes champs ci-dessus.
+
+3- La commande : docker rm ( permet de supprimer ces instances) si on execute cette fois-ci la commande (3) la liste sera vide.
+
+Maintenant on va expliquer brievement c'est quoi un ficher docker ; prenons l'exemple hello-world (from git) on constate qu'il contient
+des commandes avec des arguments:
+FROM scratch    //on commence cette commande from scratch (à partir de rien)
+COPY hello /    //copier le hello directory dans la racine (/) du container 
+CMD ["/hello"]  //exectuer la commande du directory (/hello)
+
+4- Après avoir compris la structure nous allons créer notre propre premier fichier docker;
+pour se faire nous avons utiliser n'importe quel éditeur de text :
+le fichier dockerfile doit suivre la même structure
+FROM ubuntu:latest //on peut préciser la version 16.01 ...
+CMD -echo "hello this is our first container we have built"
+
+5- docker build [path to the docker file] [optionel : built destination] [optional -t nom_de_limage]
+docker build . -t james-hello-world
+
+6- docker run james-hello-world : cette commande permet de créer l'instance du conteneur.
+ 
+
+
