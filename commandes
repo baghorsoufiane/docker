@@ -32,6 +32,19 @@ CMD -echo "hello this is our first container we have built"
 docker build . -t james-hello-world
 
 6- docker run james-hello-world : cette commande permet de créer l'instance du conteneur.
+
+7- Maintenant on va déployer notre première application web sur nginx :
+ - vi web1.html : <html><body><h1>Our first application</h1></body></html>
+ - vi ngnix.conf : server { root /www }
+ - vi dockerfile : FROM nginx:latest
+                   ADD web1.html /www/
+                   ADD ngnix.conf /etc/nginx/conf.d/default.conf
+                   EXPOSE 80
+                   EXPOSE 443
+                   CMD nginx -g "daemon off;"
+ - docker build . -t webapp-james:latest
+ - docker run webapp-james
+ 
  
 
 
